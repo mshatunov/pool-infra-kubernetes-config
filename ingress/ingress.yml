@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: gateway-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - http:
+        paths:
+        - path: /infra/eureka
+          backend:
+            serviceName: pool-infra-eureka-server
+            servicePort: 8761 
+        - path: /api/customer
+          backend:
+            serviceName: pool-api-customer
+            servicePort: 8080
