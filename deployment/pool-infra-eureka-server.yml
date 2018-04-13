@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: pool-infra-eureka-server
+  labels:
+    app: pool-infra-eureka-server
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: pool-infra-eureka-server
+    spec:
+      containers:
+      - name: pool-infra-eureka-server
+        image: mshatunov/pool-infra-eureka-server:latest
+        ports:
+        - containerPort: 8761
+          protocol: TCP

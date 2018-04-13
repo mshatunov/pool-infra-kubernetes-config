@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: pool-db-mongo
+  labels:
+    app: pool-db-mongo
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: pool-db-mongo
+    spec:
+      containers:
+      - name: pool-db-mongo
+        image: mongo
+        ports:
+        - containerPort: 27017
+          protocol: TCP
