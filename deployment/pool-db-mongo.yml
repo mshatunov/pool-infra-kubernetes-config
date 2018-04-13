@@ -17,3 +17,15 @@ spec:
         ports:
         - containerPort: 27017
           protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pool-db-mongo
+spec:
+  selector:
+    app: pool-db-mongo
+  ports:
+  - port: 27017
+    targetPort: 27017
+  type: NodePort

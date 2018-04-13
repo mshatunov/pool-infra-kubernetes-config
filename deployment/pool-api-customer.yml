@@ -17,3 +17,14 @@ spec:
         ports:
         - containerPort: 8080
           protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pool-api-customer
+spec:
+  selector:
+    app: pool-api-customer
+  ports:
+  - port: 8080
+  type: NodePort
