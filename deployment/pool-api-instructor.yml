@@ -1,0 +1,30 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: pool-api-instructor
+  labels:
+    app: pool-api-instructor
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: pool-api-instructor
+    spec:
+      containers:
+      - name: pool-api-instructor
+        image: mshatunov/pool-api-instructor:latest
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pool-api-instructor
+spec:
+  selector:
+    app: pool-api-instructor
+  ports:
+  - port: 8080
+  type: NodePort

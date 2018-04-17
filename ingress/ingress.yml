@@ -16,3 +16,7 @@ spec:
           backend:
             serviceName: pool-api-customer
             servicePort: 8080
+        - path: /api/instructor
+          backend:
+            serviceName: pool-api-instructor
+            servicePort: 8080
