@@ -1,3 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pool-db-mongo
+spec:
+  selector:
+    app: pool-db-mongo
+  ports:
+  - port: 27017
+    targetPort: 27017
+  type: NodePort
+---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
@@ -24,15 +36,3 @@ spec:
         - name: mongo-volume
           hostPath:
             path: /data/mongo
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: pool-db-mongo
-spec:
-  selector:
-    app: pool-db-mongo
-  ports:
-  - port: 27017
-    targetPort: 27017
-  type: NodePort

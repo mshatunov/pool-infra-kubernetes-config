@@ -1,3 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pool-infra-eureka-server
+spec:
+  selector:
+    app: pool-infra-eureka-server
+  ports:
+  - port: 8761
+    targetPort: 8761
+  type: NodePort
+---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
@@ -17,15 +29,3 @@ spec:
         ports:
         - containerPort: 8761
           protocol: TCP
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: pool-infra-eureka-server
-spec:
-  selector:
-    app: pool-infra-eureka-server
-  ports:
-  - port: 8761
-    targetPort: 8761
-  type: NodePort
