@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pool-api-schedule
+spec:
+  selector:
+    app: pool-api-schedule
+  ports:
+  - port: 8080
+  type: NodePort
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: pool-api-schedule
+  labels:
+    app: pool-api-schedule
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: pool-api-schedule
+    spec:
+      containers:
+      - name: pool-api-schedule
+        image: mshatunov/pool-api-schedule:latest
+        ports:
+        - containerPort: 8080
+          protocol: TCP
