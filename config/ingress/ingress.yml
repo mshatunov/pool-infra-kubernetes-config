@@ -20,3 +20,7 @@ spec:
           backend:
             serviceName: pool-api-instructor
             servicePort: 8080
+        - path: /api/schedule
+          backend:
+            serviceName: pool-api-schedule
+            servicePort: 8080
