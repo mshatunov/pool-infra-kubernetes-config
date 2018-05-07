@@ -1,7 +1,14 @@
 # Deployment of pool applications with infrastructure
 
 ## Install ingress on kubernetes  
-`helm install --name my-release stable/nginx-ingress --set rbac.create=true`
+`helm init`
+
+`helm install --name stable/nginx-ingress --set rbac.create=true`   
+
+If using kubectl proxy
+`kubectl --namespace=kube-system edit deployment/tiller-deploy and changed automountServiceAccountToken to true.`
+
+`kubectl --namespace=kube-system create clusterrolebinding add-on-cluster-admin --clusterrole=cluster-admin --serviceaccount=kube-system:default`
 
 ## Deploy pool apps
 From scratch    
