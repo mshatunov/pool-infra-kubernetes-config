@@ -1,12 +1,22 @@
 # Deployment of pool applications with infrastructure
 
+##
+Dashboard url:  
+http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
+
+## Start minikube
+minikube stop &&
+minikube delete &&
+minikube --memory 8192 --cpus 4 start
+
 ## Install ingress on kubernetes  
 `helm init`
 
-`helm install --name stable/nginx-ingress --set rbac.create=true`   
+`helm install --name my-release stable/nginx-ingress --set rbac.create=true`   
 
 If using kubectl proxy
-`kubectl --namespace=kube-system edit deployment/tiller-deploy and changed automountServiceAccountToken to true.`
+`kubectl --namespace=kube-system edit deployment/tiller-deploy` 
+and changed automountServiceAccountToken to true.
 
 `kubectl --namespace=kube-system create clusterrolebinding add-on-cluster-admin --clusterrole=cluster-admin --serviceaccount=kube-system:default`
 
