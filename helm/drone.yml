@@ -1,9 +1,0 @@
-service:
-  type: NodePort        
-server:
-  env:
-    DRONE_PROVIDER: "github"
-    DRONE_OPEN: "true"
-    DRONE_GITHUB: "true"
-    DRONE_GITHUB_CLIENT: "4bb412d6983e23af6b64"
-    DRONE_GITHUB_SECRET: SECRET

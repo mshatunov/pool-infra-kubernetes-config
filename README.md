@@ -12,23 +12,6 @@
 `openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout tls.key -out tls.crt -subj "/CN=mshatunov.dev" -days 3650`
 `kubectl create secret tls mshatunov-dev-tls --cert=tls.crt --key=tls.key`
 
-
-## Install dron ci
-`helm install -f helm/drone.yml stable/drone`
-
-```sh
-helm upgrade eerie-mastiff \
-      --reuse-values \
-      --set server.env.DRONE_PROVIDER="github" \
-      --set server.env.DRONE_GITHUB="true" \
-      --set server.env.DRONE_ORGS="mshatunov" \
-      --set server.env.DRONE_GITHUB_CLIENT="4bb412d6983e23af6b64" \
-      --set server.env.DRONE_GITHUB_CLIENT_SECRET="19feb0a5b2c6efdba98128d609e98c45d0795953" \
-      --set ingress.enabled=true \
-
-      stable/drone
-```      
-
 ## Deploy pool apps
 From scratch
 `kubectl create -f config/ --recursive --save-config`
