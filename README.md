@@ -1,23 +1,33 @@
 # Deployment of pool applications with infrastructure
 
-## Dashboard url:  
-http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
-
 ## Start minikube
-minikube stop &&
-minikube delete &&
-minikube --memory 8192 --cpus 4 start
+`minikube stop && minikube delete && minikube --memory 8192 --cpus 4 start`
 
-## Install ingress on kubernetes  
+## Cluster init
 `helm init`
+`minikube addons enable ingress`
+`sudo echo "$(minikube ip) mshatunov.dev" | sudo tee -a /etc/hosts`
 
-`helm install stable/nginx-ingress --set rbac.create=true`
+### ssl
+`openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout tls.key -out tls.crt -subj "/CN=mshatunov.dev" -days 3650`
+`kubectl create secret tls mshatunov-dev-tls --cert=tls.crt --key=tls.key`
 
-If using kubectl proxy
-`kubectl --namespace=kube-system edit deployment/tiller-deploy`
-and change automountServiceAccountToken to true.
 
-`kubectl --namespace=kube-system create clusterrolebinding add-on-cluster-admin --clusterrole=cluster-admin --serviceaccount=kube-system:default`
+## Install dron ci
+`helm install -f helm/drone.yml stable/drone`
+
+```sh
+helm upgrade eerie-mastiff \
+      --reuse-values \
+      --set server.env.DRONE_PROVIDER="github" \
+      --set server.env.DRONE_GITHUB="true" \
+      --set server.env.DRONE_ORGS="mshatunov" \
+      --set server.env.DRONE_GITHUB_CLIENT="4bb412d6983e23af6b64" \
+      --set server.env.DRONE_GITHUB_CLIENT_SECRET="19feb0a5b2c6efdba98128d609e98c45d0795953" \
+      --set ingress.enabled=true \
+
+      stable/drone
+```      
 
 ## Deploy pool apps
 From scratch
