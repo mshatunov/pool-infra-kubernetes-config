@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
       - name: pool-db-mongo
-        image: mongo
+        image: mongo:4.0.4
         ports:
         - containerPort: 27017
           protocol: TCP
