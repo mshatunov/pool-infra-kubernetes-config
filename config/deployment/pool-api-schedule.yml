@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - name: pool-api-schedule
-        image: mshatunov/pool-api-schedule:latest
+        image: mshatunov/pool-api-schedule:0.0.2
         ports:
         - containerPort: 8080
           protocol: TCP

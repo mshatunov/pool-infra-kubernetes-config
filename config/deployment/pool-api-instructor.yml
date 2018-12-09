@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - name: pool-api-instructor
-        image: mshatunov/pool-api-instructor:latest
+        image: mshatunov/pool-api-instructor:0.0.2
         ports:
         - containerPort: 8080
           protocol: TCP

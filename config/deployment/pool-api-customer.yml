@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - name: pool-api-customer
-        image: mshatunov/pool-api-customer:latest
+        image: mshatunov/pool-api-customer:0.0.2
         ports:
         - containerPort: 8080
           protocol: TCP
